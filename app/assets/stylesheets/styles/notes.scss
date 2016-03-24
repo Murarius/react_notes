@@ -1,3 +1,23 @@
 // Place all the styles related to the notes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.notes {
+  position: relative;
+}
+
+.note {
+  background-color: $note-color;
+  box-shadow: 5px 5px 5px $note-shadow;
+  box-sizing: border-box;
+  display: inline-block;
+  font-family: 'Gloria Hallelujah';
+  font-size: 20px;
+  font-weight: bold;
+  height: 150px;
+  left: 100px;
+  padding: 40px 10px 10px;
+  position: absolute;
+  top: 100px;
+  width: 150px;
+}
