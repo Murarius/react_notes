@@ -1,19 +1,21 @@
 this.Notes = React.createClass({
   getInitialState: function() {
     return {
-      records: this.props.data
+      notes: this.props.data
     };
   },
   getDefaultProps: function() {
     return {
-      records: []
+      notes: []
     };
   },
   render: function() {
     return (
     <div className="notes">
       <h2 className="title"> Notes: </h2>
-
+      {this.state.notes.map(function(note) {
+        return <Note key={note.id} data={note}></Note>
+      })}
     </div>
     );
   }
