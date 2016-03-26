@@ -1,7 +1,7 @@
 var Note = React.createClass({
   getInitialState: function() {
     return {
-      record: this.props.data,
+      note: this.props.data,
       editing: false
     };
   },
@@ -17,7 +17,7 @@ var Note = React.createClass({
          <a onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
          <a onClick={ this.remove } className='delete'><i className="fa fa-times"></i></a>
        </span>
-       { this.state.record.body }
+       { this.state.note.body }
      </div>
     );
   },
@@ -27,7 +27,7 @@ var Note = React.createClass({
         <span className='buttons'>
           <a onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
         </span>
-        <textarea defaultValue={this.state.record.body}></textarea>
+        <textarea defaultValue={this.state.note.body}></textarea>
       </div>
     );
   },
