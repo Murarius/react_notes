@@ -1,7 +1,8 @@
 var Note = React.createClass({
   getInitialState: function() {
     return {
-      record: this.props.data
+      record: this.props.data,
+      editing: false
     };
   },
   getDefaultProps: function() {
@@ -9,15 +10,8 @@ var Note = React.createClass({
       null
     };
   },
-  edit: function() {
-    alert('Editing Note');
-  },
-  remove: function() {
-    alert('Removing Note');
-  },
-  render: function() {
+  renderNote: function() {
     return (
-     // <div className='note'>{ this.props.record.body}</div>
      <div className='note'>
        <span className='buttons'>
          <a onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
@@ -26,5 +20,33 @@ var Note = React.createClass({
        { this.state.record.body }
      </div>
     );
+  },
+  renderForm: function() {
+    return (
+      <div className='note'>
+        <span className='buttons'>
+          <a onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
+        </span>
+        <textarea defaultValue={this.state.record.body}></textarea>
+      </div>
+    );
+  },
+  edit: function(e) {
+    //e.preventDefault();
+    this.setState({editing: true});
+  },
+  save: function(e) {
+    this.setState({editing: false});
+
+  },
+  remove: function() {
+    alert('Removing Note');
+  },
+  render: function() {
+    if (this.state.editing) {
+      return this.renderForm();
+    } else {
+      return this.renderNote();
+    }
   }
 });
