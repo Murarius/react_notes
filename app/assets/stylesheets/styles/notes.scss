@@ -66,4 +66,19 @@
   .delete {
     @include button-color($delete-button-color)
   }
+
+  .save {
+    @include button-color($save-button-color)
+  }
+
+  textarea {
+    background-color: lighten($note-color, 30%);
+    font-family: 'Gloria Hallelujah';
+    font-size: 20px;
+    font-weight: bold;
+    height: 100px;
+    left: -4px;
+    position: relative;
+    width: 135px;
+  }
 }
