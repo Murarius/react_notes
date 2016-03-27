@@ -14,8 +14,8 @@ var Note = React.createClass({
     return (
      <div className='note'>
        <span className='buttons'>
-         <a onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
-         <a onClick={ this.remove } className='delete'><i className="fa fa-times"></i></a>
+         <a href='#' onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
+         <a href='#' onClick={ this.remove } className='delete'><i className="fa fa-times"></i></a>
        </span>
        { this.state.note.body }
      </div>
@@ -25,7 +25,7 @@ var Note = React.createClass({
     return (
       <div className='note'>
         <span className='buttons'>
-          <a onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
+          <a href='#' onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
         </span>
         <textarea defaultValue={this.state.note.body}></textarea>
       </div>
