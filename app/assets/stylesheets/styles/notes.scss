@@ -1,26 +1,54 @@
-// Place all the styles related to the notes controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+%button-shape {
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px $note-shadow;
+  color: $main-color;
+  display: inline-block;
+  margin: 2px;
+  text-align: center;
+}
+
+%active-button-animation {
+  box-shadow: 1px 1px 1px $note-shadow;
+  left: 1px;
+  position: relative;
+  top: 1px;
+}
 
 .notes {
   position: relative;
+}
+
+.add-note {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+
+  a {
+    @extend %button-shape;
+    @include button-color($add-note-color);
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 5px;
+    text-decoration: none;
+
+    &:active {
+      @extend %active-button-animation;
+    }
+  }
 }
 
 .note {
   background-color: $note-color;
   box-shadow: 5px 5px 5px $note-shadow;
   box-sizing: border-box;
-  display: inline-block;
   font-family: 'Gloria Hallelujah';
   font-size: 20px;
   font-weight: bold;
   height: 150px;
-//  left: 100px;
   margin: 5px;
   padding: 40px 10px 10px;
-//  position: absolute;
   position: relative;
-//  top: 100px;
   width: 150px;
 
   &:hover .buttons {
@@ -39,25 +67,14 @@
   }
 
   a {
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px $note-shadow;
-    display: inline-block;
+    @extend %button-shape;
     font-size: 14px;
     height: 25px;
     line-height: 25px;
-    margin: 2px;
-    text-align: center;
     width: 25px;
 
-    &:hover { // not working !!!!!!!!!!!!!
-      cursor: grab;
-    }
-
     &:active {
-      box-shadow: 1px 1px 1px $note-shadow;
-      left: 1px;
-      position: relative;
-      top: 1px;
+      @extend %active-button-animation;
     }
   }
 
