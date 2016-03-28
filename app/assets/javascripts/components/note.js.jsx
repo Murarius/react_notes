@@ -10,6 +10,23 @@ var Note = React.createClass({
       null
     };
   },
+  validate: function() {
+    var bodyValue=this.refs.newBody.value;
+    if (bodyValue.length<=16) {
+      this.setState({tmpBody: bodyValue});
+    } else {
+      this.refs.newBody.value = this.state.tmpBody;
+    }
+  },
+  edit: function(e) {
+    this.setState({editing: true});
+  },
+  save: function(e) {
+    this.setState({editing: false});
+  },
+  remove: function() {
+    alert('Removing Note');
+  },
   renderNote: function() {
     return (
      <div className='note'>
@@ -27,20 +44,9 @@ var Note = React.createClass({
         <span className='buttons'>
           <a href='#' onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
         </span>
-        <textarea defaultValue={this.state.note.body}></textarea>
+        <textarea ref='newBody' onChange={this.validate} defaultValue={this.state.note.body}></textarea>
       </div>
     );
-  },
-  edit: function(e) {
-    //e.preventDefault();
-    this.setState({editing: true});
-  },
-  save: function(e) {
-    this.setState({editing: false});
-
-  },
-  remove: function() {
-    alert('Removing Note');
   },
   render: function() {
     if (this.state.editing) {
