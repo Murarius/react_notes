@@ -25,6 +25,7 @@ gem 'jbuilder', '~> 2.0'
 
 group :development, :test do
   gem 'byebug'
+  gem 'spring'
 end
 
 group :development do
