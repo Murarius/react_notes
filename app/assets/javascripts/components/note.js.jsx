@@ -36,6 +36,8 @@ var Note = React.createClass({
           correct_this.setState({editing: false});
         }
       });
+    } else {
+      this.setState({editing: false});
     }
   },
   remove: function(e) {
