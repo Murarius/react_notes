@@ -1,15 +1,15 @@
 var Note = React.createClass({
   getInitialState: function() {
     return {
-      note: this.props.data,
+      note: this.props.note,
       editing: false
     };
   },
-  getDefaultProps: function() {
-    return {
-      null
-    };
-  },
+  //getDefaultProps: function() {
+  //  return {
+  //    null
+  //  };
+  //},
   validate: function() {
     var bodyValue=this.refs.newBody.value;
     if (bodyValue.length<=16) {
@@ -24,8 +24,17 @@ var Note = React.createClass({
   save: function(e) {
     this.setState({editing: false});
   },
-  remove: function() {
-    alert('Removing Note');
+  remove: function(e) {
+    var correct_this = this;
+    e.preventDefault();
+    $.ajax({
+      type: "DELETE",
+      url: 'notes/' + correct_this.state.note.id,
+      dataType: 'JSON',
+      success: function(note) {
+        correct_this.props.handleRemove(correct_this.state.note);
+      }
+    });
   },
   renderNote: function() {
     return (
