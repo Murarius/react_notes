@@ -10,14 +10,20 @@ this.Notes = React.createClass({
     };
   },
   addRecord: function(note) {
-    var notes;
-    notes = this.state.notes.slice();
+    var notes = this.state.notes.slice();
     notes.push(note);
     this.setState({notes: notes});
   },
+  updateRecord: function(note, newNote) {
+    var notes = this.state.notes.slice();
+    var index = notes.indexOf(note);
+    notes[index]=newNote;
+    //notes.splice(index, 1, note);
+    this.replaceState({notes: notes});
+  },
   removeRecord: function(note) {
-    notes = this.state.notes.slice();
-    index = notes.indexOf(note);
+    var notes = this.state.notes.slice();
+    var index = notes.indexOf(note);
     notes.splice(index, 1);
     this.replaceState({notes: notes});
   },
@@ -29,7 +35,7 @@ this.Notes = React.createClass({
 
       <AddNote handleNewRecord={this.addRecord}></AddNote>
       {this.state.notes.map(function(note) {
-        return (<Note key={note.id} note={note} handleRemove={correct_this.removeRecord}></Note>);
+        return (<Note key={note.id} note={note} handleRemove={correct_this.removeRecord} handleUpdate={correct_this.updateRecord}></Note>);
       })}
     </div>
     );

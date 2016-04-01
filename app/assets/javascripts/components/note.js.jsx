@@ -1,8 +1,9 @@
 var Note = React.createClass({
   getInitialState: function() {
     return {
-      note: this.props.note,
-      editing: false
+      //note: this.props.note,
+      editing: false,
+      newBodyValue: this.props.note.body
     };
   },
   //getDefaultProps: function() {
@@ -11,28 +12,41 @@ var Note = React.createClass({
   //  };
   //},
   validate: function() {
-    var bodyValue=this.refs.newBody.value;
-    if (bodyValue.length<=16) {
-      this.setState({tmpBody: bodyValue});
+    var newBodyValue=this.refs.newBody.value;
+    if (newBodyValue.length<=16) {
+      this.setState({newBodyValue: newBodyValue});
     } else {
-      this.refs.newBody.value = this.state.tmpBody;
+      this.refs.newBody.value = this.state.newBodyValue;
     }
   },
   edit: function(e) {
     this.setState({editing: true});
   },
   save: function(e) {
-    this.setState({editing: false});
+    if (this.state.newBodyValue!=this.props.note.body) {
+      var correct_this = this;
+      var note = this.props.note;
+      $.ajax({
+        type: "PATCH",
+        url: 'notes/' + correct_this.props.note.id,
+        data: { note: { body: this.state.newBodyValue } },
+        dataType: 'JSON',
+        success: function(newNote) {
+          correct_this.props.handleUpdate(note, newNote);
+          correct_this.setState({editing: false});
+        }
+      });
+    }
   },
   remove: function(e) {
     var correct_this = this;
     e.preventDefault();
     $.ajax({
       type: "DELETE",
-      url: 'notes/' + correct_this.state.note.id,
+      url: 'notes/' + correct_this.props.note.id,
       dataType: 'JSON',
       success: function(note) {
-        correct_this.props.handleRemove(correct_this.state.note);
+        correct_this.props.handleRemove(correct_this.props.note);
       }
     });
   },
@@ -43,7 +57,7 @@ var Note = React.createClass({
          <a href='#' onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
          <a href='#' onClick={ this.remove } className='delete'><i className="fa fa-times"></i></a>
        </span>
-       { this.state.note.body }
+       { this.props.note.body }
      </div>
     );
   },
@@ -53,7 +67,7 @@ var Note = React.createClass({
         <span className='buttons'>
           <a href='#' onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
         </span>
-        <textarea ref='newBody' onChange={this.validate} defaultValue={this.state.note.body}></textarea>
+        <textarea ref='newBody' onChange={this.validate} defaultValue={this.props.note.body}></textarea>
       </div>
     );
   },
