@@ -18,6 +18,7 @@
   background: radial-gradient(farthest-side at 10% 10%, $notes-background-gradient-top, $notes-background-gradient-bottom);
   border: 1px solid $notes-border-color;
   border-radius: 5px;
+  box-shadow: 10px 10px 20px $notes-shadow-color;
   box-sizing: border-box;
   height: 90vh;
   margin: 0 auto;
@@ -54,6 +55,7 @@
 
 .note {
   background-color: $note-color;
+  background-image: url('paper.svg');
   box-shadow: 5px 5px 15px $note-shadow-color;
   box-sizing: border-box;
   font-family: 'Gloria Hallelujah';
@@ -123,5 +125,17 @@
   color: $notes-count-text-color;
   display: inline-block;
   margin-left: 10px;
+  min-width: 25px;
   padding: 8px;
+  text-align: center;
+}
+
+.pin {
+  background-image: url('pin.svg');
+  background-size: cover;
+  height: 40px;
+  left: 30px;
+  position: absolute;
+  top: 10px;
+  width: 40px;
 }

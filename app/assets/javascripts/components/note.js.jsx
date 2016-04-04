@@ -55,6 +55,7 @@ var Note = React.createClass({
   renderNote: function() {
     return (
      <div className='note'>
+       <div className='pin'></div>
        <span className='buttons'>
          <a href='#' onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
          <a href='#' onClick={ this.remove } className='delete'><i className="fa fa-times"></i></a>

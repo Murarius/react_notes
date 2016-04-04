@@ -1,5 +1,6 @@
 html {
-  background: radial-gradient(farthest-side at 10% 10%, #fff6b6, #fefde1);
-  height: 100vh;
+  background-color: $html-background-color;
+  background-image: url('notes-background.svg');
   font-family: 'Arial';
+  height: 100vh;
 }
