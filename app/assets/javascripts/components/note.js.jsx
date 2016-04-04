@@ -29,7 +29,7 @@ var Note = React.createClass({
   },
   validate: function() {
     var newBodyValue=this.refs.newBody.value;
-    if (newBodyValue.length<=16) {
+    if (newBodyValue.length<=21) {
       this.setState({newBodyValue: newBodyValue});
     } else {
       this.refs.newBody.value = this.state.newBodyValue;
