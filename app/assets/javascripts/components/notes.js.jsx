@@ -19,7 +19,7 @@ this.Notes = React.createClass({
     var notes = this.state.notes.slice();
     var index = notes.indexOf(note);
     notes[index]=newNote;
-    this.replaceState({notes: notes});
+    this.replaceState({notes: notes, notesCount: notes.length});
   },
   removeRecord: function(note) {
     var notes = this.state.notes.slice();
