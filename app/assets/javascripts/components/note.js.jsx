@@ -11,6 +11,22 @@ var Note = React.createClass({
   //    null
   //  };
   //},
+  random: function(min, max) {
+    return (min + Math.ceil(Math.random() * max));
+  },
+  notePosition: function() {
+    this.style = {
+      left: this.random(0, 90) + '%',
+      top: this.random(5, 70) + '%',
+      transform: 'rotate(' + this.random(-10, 30) + 'deg)'
+    };
+  },
+  pinPosition: function() {
+
+  },
+  componentWillMount: function() {
+    this.notePosition();
+  },
   validate: function() {
     var newBodyValue=this.refs.newBody.value;
     if (newBodyValue.length<=16) {
@@ -54,7 +70,7 @@ var Note = React.createClass({
   },
   renderNote: function() {
     return (
-     <div className='note'>
+     <div className='note' style={this.style}>
        <div className='pin'></div>
        <span className='buttons'>
          <a href='#' onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
@@ -66,7 +82,7 @@ var Note = React.createClass({
   },
   renderForm: function() {
     return (
-      <div className='note'>
+      <div className='note' style={this.style}>
         <span className='buttons'>
           <a href='#' onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
         </span>
