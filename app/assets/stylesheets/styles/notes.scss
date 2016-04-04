@@ -1,6 +1,6 @@
 %button-shape {
   border-radius: 5px;
-  box-shadow: 2px 2px 2px $note-shadow;
+  box-shadow: 2px 2px 4px $button-shadow-color;
   color: $main-color;
   display: inline-block;
   margin: 2px;
@@ -8,14 +8,28 @@
 }
 
 %active-button-animation {
-  box-shadow: 1px 1px 1px $note-shadow;
+  box-shadow: 1px 1px 3px $button-shadow-color;
   left: 1px;
   position: relative;
   top: 1px;
 }
 
 .notes {
+  background: radial-gradient(farthest-side at 10% 10%, $notes-background-gradient-top, $notes-background-gradient-bottom);
+  border: 1px solid $notes-border-color;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 90vh;
+  margin: 0 auto;
+  margin-top: 4vh;
+  overflow: hidden;
+  padding: 10px;
   position: relative;
+  width: 90vw;
+
+  h2 {
+    margin: 4px 0 20px;
+  }
 }
 
 .add-note {
@@ -29,7 +43,7 @@
     font-size: 16px;
     font-weight: bold;
     letter-spacing: 1px;
-    padding: 5px;
+    padding: 10px;
     text-decoration: none;
 
     &:active {
@@ -40,7 +54,7 @@
 
 .note {
   background-color: $note-color;
-  box-shadow: 5px 5px 5px $note-shadow;
+  box-shadow: 5px 5px 15px $note-shadow-color;
   box-sizing: border-box;
   font-family: 'Gloria Hallelujah';
   font-size: 20px;
@@ -100,4 +114,14 @@
     position: relative;
     width: 135px;
   }
+}
+
+.notes-count {
+  background-color: $notes-count-background-color;
+  border-radius: 5px;
+  box-shadow: 0 0 20px 6px $notes-count-shadow-color;
+  color: $notes-count-text-color;
+  display: inline-block;
+  margin-left: 10px;
+  padding: 8px;
 }

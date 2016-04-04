@@ -1,7 +1,15 @@
 $note-color:                   #e4e73b;
-$note-shadow:                  #808080;
+$note-shadow-color:            #808080;
+$button-shadow-color:          $note-shadow-color;
 $edit-button-color:            #75c7e6;
 $delete-button-color:          #e69375;
 $save-button-color:            #a2df89;
 $add-note-color:               $save-button-color;
 $main-color:                   #000;
+
+$notes-background-gradient-top:         lighten($edit-button-color, 20%);
+$notes-background-gradient-bottom:      $edit-button-color;
+$notes-border-color:                    darken($edit-button-color, 10%);
+$notes-count-background-color:          #e62828;
+$notes-count-text-color:                #fff;
+$notes-count-shadow-color:              #fff;
