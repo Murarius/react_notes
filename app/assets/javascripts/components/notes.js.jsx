@@ -1,7 +1,8 @@
 this.Notes = React.createClass({
   getInitialState: function() {
     return {
-      notes: this.props.data
+      notes: this.props.data,
+      notesCount: this.props.data.length
     };
   },
   getDefaultProps: function() {
@@ -12,26 +13,26 @@ this.Notes = React.createClass({
   addRecord: function(note) {
     var notes = this.state.notes.slice();
     notes.push(note);
-    this.setState({notes: notes});
+    this.replaceState({notes: notes, notesCount: notes.length});
   },
   updateRecord: function(note, newNote) {
     var notes = this.state.notes.slice();
     var index = notes.indexOf(note);
     notes[index]=newNote;
-    //notes.splice(index, 1, note);
     this.replaceState({notes: notes});
   },
   removeRecord: function(note) {
     var notes = this.state.notes.slice();
     var index = notes.indexOf(note);
     notes.splice(index, 1);
-    this.replaceState({notes: notes});
+    this.replaceState({notes: notes, notesCount: notes.length});
+
   },
   render: function() {
     var correct_this = this;
     return (
     <div className="notes">
-      <h2 className="title"> Notes: </h2>
+      <NotesCount>{this.state.notesCount}</NotesCount>
 
       <AddNote handleNewRecord={this.addRecord}></AddNote>
       {this.state.notes.map(function(note) {
