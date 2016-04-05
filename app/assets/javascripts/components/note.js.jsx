@@ -1,21 +1,16 @@
 var Note = React.createClass({
   getInitialState: function() {
     return {
-      //note: this.props.note,
       editing: false,
-      newBodyValue: this.props.note.body
+      newBodyValue: this.props.note.body,
+      dragging: false
     };
   },
-  //getDefaultProps: function() {
-  //  return {
-  //    null
-  //  };
-  //},
   random: function(min, max) {
     return (min + Math.ceil(Math.random() * max));
   },
   notePosition: function() {
-    this.style = {
+    this.state.position = {
       left: this.random(0, 90) + '%',
       top: this.random(5, 70) + '%',
       transform: 'rotate(' + this.random(-10, 30) + 'deg)'
@@ -24,6 +19,47 @@ var Note = React.createClass({
   pinPosition: function() {
 
   },
+  onMouseDown: function (e) {
+    // only left mouse button
+    if (e.button !== 0) return;
+    var pos = $(ReactDOM.findDOMNode(this)).position();
+    this.setState({
+      dragging: true,
+      rel: {
+        x: e.pageX - pos.left,
+        y: e.pageY - pos.top
+      }
+    });
+    document.addEventListener('mousemove', this.onMouseMove);
+    document.addEventListener('mouseup', this.onMouseUp);
+    e.stopPropagation();
+    e.preventDefault();
+  },
+  onMouseUp: function (e) {
+    this.setState({
+      dragging: false,
+      position: {
+        left: (e.pageX - this.state.rel.x).toString()+'px',
+        top: (e.pageY - this.state.rel.y).toString()+'px',
+        transform: 'rotate(' + this.random(-10, 30) + 'deg)'
+      }
+    });
+    document.removeEventListener('mousemove', this.onMouseMove);
+    document.removeEventListener('mouseup', this.onMouseUp);
+    e.stopPropagation();
+    e.preventDefault();
+   },
+   onMouseMove: function (e) {
+     if (!this.state.dragging) return;
+     this.setState({
+        position: {
+          left: (e.pageX - this.state.rel.x).toString()+'px',
+          top: (e.pageY - this.state.rel.y).toString()+'px',
+        }
+     });
+      e.stopPropagation();
+      e.preventDefault();
+   },
   componentWillMount: function() {
     this.notePosition();
   },
@@ -70,7 +106,8 @@ var Note = React.createClass({
   },
   renderNote: function() {
     return (
-     <div className='note' style={this.style}>
+     <div className='note' style={this.state.position} onMouseDown={this.onMouseDown} >
+
        <div className='pin'></div>
        <span className='buttons'>
          <a href='#' onClick={ this.edit } className='edit'><i className='fa fa-pencil'></i></a>
@@ -82,7 +119,7 @@ var Note = React.createClass({
   },
   renderForm: function() {
     return (
-      <div className='note' style={this.style}>
+      <div className='note' style={this.state.position}>
         <span className='buttons'>
           <a href='#' onClick={ this.save } className='save'><i className='fa fa-floppy-o'></i></a>
         </span>
