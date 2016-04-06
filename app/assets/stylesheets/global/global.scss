@@ -1,6 +1,6 @@
 html {
   background-color: $html-background-color;
-  background-image: url('notes-background.svg');
+  background-image: asset-url('notes-background.svg');
   font-family: 'Arial';
   height: 100vh;
   user-select: none;

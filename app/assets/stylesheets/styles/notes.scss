@@ -55,7 +55,7 @@
 
 .note {
   background-color: $note-color;
-  background-image: url('paper.svg');
+  background-image: asset-url('paper.svg');
   border: 1px solid $note-border-color;
   box-shadow: 5px 5px 15px $note-shadow-color;
   box-sizing: border-box;
@@ -139,7 +139,7 @@
 }
 
 .pin {
-  background-image: url('pin.svg');
+  background-image: asset-url('pin.svg');
   background-size: cover;
   height: 40px;
   left: 30px;
