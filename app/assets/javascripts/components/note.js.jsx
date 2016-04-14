@@ -19,7 +19,15 @@ var Note = React.createClass({
   pinPosition: function() {
 
   },
+  pxToPercent: function(x, y) {
+    var width = $('.notes').width();
+    var height = $('.notes').height();
+    var percentPosition = {x: Math.ceil(x/width*100), y: Math.ceil(y/height*100)};
+    return percentPosition;
+  },
   onMouseDown: function (e) {
+    // exit when click on button
+    if ($(e.target).parent().hasClass('edit') || $(e.target).hasClass('edit')) { return }
     // only left mouse button
     if (e.button !== 0) return;
     var pos = $(ReactDOM.findDOMNode(this)).position();
@@ -36,12 +44,16 @@ var Note = React.createClass({
     e.preventDefault();
   },
   onMouseUp: function (e) {
+    var moveX = e.pageX - this.state.rel.x;
+    var moveY = e.pageY - this.state.rel.y;
+    var percentageDestination = this.pxToPercent(moveX, moveY);
+
     this.setState({
       dragging: false,
       position: {
-        left: (e.pageX - this.state.rel.x).toString()+'px',
-        top: (e.pageY - this.state.rel.y).toString()+'px',
-        transform: 'rotate(' + this.random(-10, 30) + 'deg)'
+        left: percentageDestination.x.toString()+'%',
+        top: percentageDestination.y.toString()+'%',
+        transform: this.state.noteRotation
       }
     });
     document.removeEventListener('mousemove', this.onMouseMove);
@@ -62,6 +74,7 @@ var Note = React.createClass({
    },
   componentWillMount: function() {
     this.notePosition();
+    this.state.noteRotation = this.state.position.transform;
   },
   validate: function() {
     var newBodyValue=this.refs.newBody.value;
